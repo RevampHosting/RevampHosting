@@ -25,8 +25,8 @@ export type SiteSettings = {
 };
 
 export const defaultSiteSettings: SiteSettings = {
-  companyName: "Northline Construction & Carpentry",
-  shortName: "Northline",
+  companyName: "Creations & Renovations",
+  shortName: "Creations",
   tagline: "Built with precision. Built to last.",
   phone: "(555) 010-2480",
   email: "info@example.com",

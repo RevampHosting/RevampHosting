@@ -15,7 +15,7 @@ export function Logo({ name, short }: { name: string; short: string }) {
         <span className="font-display text-xl font-extrabold uppercase tracking-[0.08em] text-white">{short}</span>
         {rest && (
           <span className="mt-1 hidden text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-muted sm:block">
-            {rest.replace(/^[-–—&]\s*/, "")}
+            {rest.replace(/^[-–—]\s*/, "")}
           </span>
         )}
       </span>
