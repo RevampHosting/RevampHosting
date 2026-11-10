@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #080808;
+  --color-charcoal: #151515;
+  --color-graphite: #1f1f1f;
+  --color-steel: #2a2a2a;
+  --color-lime: #a4ff00;
+  --color-lime-dark: #8ad600;
+  --color-muted: #a0a0a0;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow), "Arial Narrow", ui-sans-serif, sans-serif;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  body {
+    background: var(--color-ink);
+    color: #fff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+  }
+  /* Calendar icon on dark date inputs */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.7;
+    cursor: pointer;
+  }
+  select option {
+    background: var(--color-charcoal);
+  }
+}
+
+@layer components {
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-x { padding-inline: 2rem; }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-lime);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2.25rem;
+    height: 2px;
+    background: var(--color-lime);
+  }
+
+  .heading-xl {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+  }
+
+  .field-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d4d4d4;
+  }
+  .field {
+    width: 100%;
+    border-radius: 2px;
+    border: 1px solid #333;
+    background: #0e0e0e;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field::placeholder { color: #6b6b6b; }
+  .field:hover { border-color: #4a4a4a; }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-lime);
+    box-shadow: 0 0 0 3px rgb(164 255 0 / 0.15);
+  }
+  .field[aria-invalid="true"] { border-color: #f87171; }
+
+  .grid-texture {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .stripe-accent {
+    background: repeating-linear-gradient(-45deg, var(--color-lime) 0 10px, transparent 10px 20px);
+  }
+}
+
+/* Scroll-reveal animation (see components/ui/reveal.tsx) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
